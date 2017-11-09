@@ -86,6 +86,16 @@
             android:textColor="@android:color/background_light"
             tools:text="Valider" />
 
+        <Button
+            android:id="@+id/bt_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Next"
+            android:textColor="@android:color/background_light"
+            tools:text="Next" />
+
     </LinearLayout>
 
 
