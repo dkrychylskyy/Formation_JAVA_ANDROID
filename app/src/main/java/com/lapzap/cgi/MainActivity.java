@@ -27,6 +27,10 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
+    static final int ID_MENU_ALERT_DIALOG = 25;
+    static final int ID_MENU_DATA_PICKER = 26;
+    static final int ID_MENU_TIME_PICKER = 27;
+
     Button btn_valider, btn_anuler, bt_next;
     TextView text_view;
     EditText input_text;
@@ -83,22 +87,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 25, 0, "alertDialog");
-        menu.add(0, 26, 0, "DatePicker");
-        menu.add(0, 27, 0, "TimePicker");
+        menu.add(0, ID_MENU_ALERT_DIALOG, 0, "alertDialog");
+        menu.add(0, ID_MENU_DATA_PICKER, 0, "DatePicker");
+        menu.add(0, ID_MENU_TIME_PICKER, 0, "TimePicker");
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case 25:
+            case ID_MENU_ALERT_DIALOG:
                 alertDialog();
                 break;
-            case 26:
+            case ID_MENU_DATA_PICKER:
                 datePicker();
                 break;
-            case 27:
+            case ID_MENU_TIME_PICKER:
                 timePicker();
                 break;
         }
