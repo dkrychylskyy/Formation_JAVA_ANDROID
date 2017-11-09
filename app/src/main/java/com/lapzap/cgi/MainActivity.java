@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_radio_unlike = (RadioButton) findViewById(R.id.btn_radio_unlike);
 
         image_view = (ImageView) findViewById(R.id.imageView);
+
     }
 
     @Override
