@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CGI</string>
+    <string name="hello">Hello World form string.xml</string>
+    <string name="like">Like</string>
+    <string name="dontlike">Don\'t like</string>
+    <string name="new_text">New text</string>
+    <string name="button_1">Ok</string>
+    <string name="button_2">Cancel</string>
+</resources>
