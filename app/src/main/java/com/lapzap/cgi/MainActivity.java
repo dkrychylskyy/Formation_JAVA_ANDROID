@@ -176,17 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, "l\'heure est : " + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] gr) {
-        super.onRequestPermissionsResult(requestCode, permissions, gr);
-//Est ce que c'est la permission qu'on a demandé ?
-        if (requestCode == 25) {
-            //On verifie la réponse
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            }
-        }
-    }
-
 
     public void getPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -197,9 +186,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 25);
-            Toast.makeText(this, "Il faut avoir permissions POSITION", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] gr) {
+        super.onRequestPermissionsResult(requestCode, permissions, gr);
+        //Est ce que c'est la permission qu'on a demandé ?
+        if (requestCode == 25) {
+            //On verifie la réponse
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(this, ServiceActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Veuliez autoriser cette application á acceder á la position.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
