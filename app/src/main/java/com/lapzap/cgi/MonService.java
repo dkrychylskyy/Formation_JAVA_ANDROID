@@ -33,6 +33,8 @@ public class MonService extends Service implements LocationListener {
         Double latitude = location.getLatitude();
         Double longitude = location.getLongitude();
 
+        MyApplication.getEventBus().post(location);
+
         Toast.makeText(this, "latitude : " + latitude + " " + "longitude : " + longitude, Toast.LENGTH_SHORT).show();
     }
 
@@ -56,6 +58,7 @@ public class MonService extends Service implements LocationListener {
         //Verification les permission pour service
         //Si on a pas la permission on ne s’abonne pas (onCreate)
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            stopSelf();
             return;
         }
         //Minimum (et non égale, c’est Android qui gère) 5 secondes et 200m de difference.(onCreate) //Le this ici représente l’interface « LocationListner » à implémenter MANUELLEMENT
@@ -72,7 +75,7 @@ public class MonService extends Service implements LocationListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this, "Start MonService", Toast.LENGTH_SHORT).show();
-        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     @Override
