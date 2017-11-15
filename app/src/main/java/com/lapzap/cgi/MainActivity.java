@@ -1,11 +1,15 @@
 package com.lapzap.cgi;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static final int ID_MENU_ALERT_DIALOG = 25;
     static final int ID_MENU_DATA_PICKER = 26;
     static final int ID_MENU_TIME_PICKER = 27;
+    static final int ID_MENU_SERVICE = 28;
+
 
     Button btn_valider, btn_anuler, bt_next;
     TextView text_view;
@@ -90,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.add(0, ID_MENU_ALERT_DIALOG, 0, "alertDialog");
         menu.add(0, ID_MENU_DATA_PICKER, 0, "DatePicker");
         menu.add(0, ID_MENU_TIME_PICKER, 0, "TimePicker");
+        menu.add(0, ID_MENU_SERVICE, 0, "Service");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -104,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case ID_MENU_TIME_PICKER:
                 timePicker();
+                break;
+            case ID_MENU_SERVICE:
+                getPermission();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -164,6 +174,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Toast.makeText(this, "l\'heure est : " + hourOfDay + ":" + minute, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] gr) {
+        super.onRequestPermissionsResult(requestCode, permissions, gr);
+//Est ce que c'est la permission qu'on a demandé ?
+        if (requestCode == 25) {
+            //On verifie la réponse
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            }
+        }
+    }
+
+
+    public void getPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(this, ServiceActivity.class);
+            startActivity(intent);
+
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 25);
+            Toast.makeText(this, "Il faut avoir permissions POSITION", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
