@@ -177,34 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void getPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(this, ServiceActivity.class);
-            startActivity(intent);
-
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 25);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] gr) {
-        super.onRequestPermissionsResult(requestCode, permissions, gr);
-        //Est ce que c'est la permission qu'on a demandé ?
-        if (requestCode == 25) {
-            //On verifie la réponse
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                Intent intent = new Intent(this, ServiceActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Veuliez autoriser cette application á acceder á la position.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-
     @Override
     public void onClick(View v) {
         if (v == btn_valider) {
@@ -233,10 +205,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             image_view.setImageResource(R.drawable.ic_done_black_48dp);
         } else if (v == btn_anuler) {
             image_view.setImageResource(R.drawable.ic_delete_forever_black_48dp);
-//            finish();
         }
         return true;
     }
 
+
+    // Test permissons
+    public void getPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(this, ServiceActivity.class);
+            startActivity(intent);
+
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 25);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] gr) {
+        super.onRequestPermissionsResult(requestCode, permissions, gr);
+        //Est ce que c'est la permission qu'on a demandé ?
+        if (requestCode == 25) {
+            //On verifie la réponse
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(this, ServiceActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Veuliez autoriser cette application á acceder á la position.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 }
