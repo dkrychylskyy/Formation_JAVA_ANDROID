@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static final int ID_MENU_DATA_PICKER = 26;
     static final int ID_MENU_TIME_PICKER = 27;
     static final int ID_MENU_SERVICE = 28;
+    static final int ID_MENU_NOTIFICATION = 29;
 
 
     Button btn_valider, btn_anuler, bt_next;
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.add(0, ID_MENU_DATA_PICKER, 0, "DatePicker");
         menu.add(0, ID_MENU_TIME_PICKER, 0, "TimePicker");
         menu.add(0, ID_MENU_SERVICE, 0, "Service");
+        menu.add(0, ID_MENU_NOTIFICATION, 0, "Notification");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -114,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case ID_MENU_SERVICE:
                 getPermission();
+                break;
+            case ID_MENU_NOTIFICATION:
+                Intent intent = new Intent(this, NotificationActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
